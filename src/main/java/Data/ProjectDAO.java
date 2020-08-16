@@ -17,26 +17,25 @@ public class ProjectDAO {
 
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
-        ResultSet rs = statement.executeUpdate(sql:"CREATE FROM");
+
 
         statement.setInt(1, project.getProjectNumber());
         statement.setString(2, project.getProjectName());
-        statement.setDate(3, Date.valueOf(project.getProjectStart());
+        statement.setDate(3, Date.valueOf(project.getProjectStart()));
         statement.setString(4, project.getDescription());
         statement.setDouble(5, project.getPrice());
-        statement.setDate(6, Date.valueOf(project.getExpectedDate());
-        statement.executeUpdate();
+        statement.setDate(6, Date.valueOf(project.getExpectedDate()));
+        int updateCount = statement.executeUpdate(sql);
     }
 
 
-    public void deleteProject(Project project) throws SQLException {
+    public void deleteProject(int projectNumber) throws SQLException {
 
-        String sql = "DELETE FROM WHERE projectNumber = '?'";
+        String sql = "DELETE FROM project WHERE project_number = ?";
 
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, project.getProjectNumber());
-
+        statement.setInt(1, projectNumber);
         statement.executeUpdate();
     }
 

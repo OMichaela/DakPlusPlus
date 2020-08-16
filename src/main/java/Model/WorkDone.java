@@ -4,9 +4,13 @@ import java.time.LocalDate;
 
 public class WorkDone {
 
+        private int staffId;
+        private int projectNumber;
         private LocalDate dateWorkDone;
         private int hoursWorked;
         private String remarks;
+
+
 
 
         public LocalDate getDateWorkDone(){

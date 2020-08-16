@@ -1,6 +1,6 @@
 package Model;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Staff {
 
@@ -8,12 +8,9 @@ public class Staff {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    private String ICEPhoneNumber;
-    private LocalDate dateOfBirth;
+    private String phoneNumberIce;
+    private Date dateOfBirth;
     private double salary;
-
-    public static void add(Staff staff) {
-    }
 
 
     public int getStaffId() {
@@ -47,19 +44,19 @@ public class Staff {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getICEPhoneNumber(){
-        return ICEPhoneNumber;
+    public String getPhoneNumberIce(){
+        return phoneNumberIce;
     }
 
-    public void setICEPhoneNumber(String ICEPhoneNumber){
-        this.ICEPhoneNumber = ICEPhoneNumber;
+    public void setPhoneNumberIce(String phoneNumberIce){
+        this.phoneNumberIce = phoneNumberIce;
     }
 
-    public LocalDate getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth){
+    public void setDateOfBirth(Date dateOfBirth){
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -78,7 +75,7 @@ public class Staff {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", ICEPhoneNumber='" + ICEPhoneNumber + '\'' +
+                ", ICEPhoneNumber='" + phoneNumberIce + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
                 ", salary=" + salary +
                 '}';
