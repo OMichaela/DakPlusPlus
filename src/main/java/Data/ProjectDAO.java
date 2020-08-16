@@ -1,12 +1,13 @@
 package Data;
 
-import Data.ConnectionFactory;
 import Model.Project;
-
-import java.sql.*;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;
+import java.sql.SQLException;
 
 
 public class ProjectDAO {
@@ -18,13 +19,12 @@ public class ProjectDAO {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
 
-
         statement.setInt(1, project.getProjectNumber());
         statement.setString(2, project.getProjectName());
-        statement.setDate(3, Date.valueOf(project.getProjectStart()));
+        statement.setDate(3, project.getProjectStart());
         statement.setString(4, project.getDescription());
         statement.setDouble(5, project.getPrice());
-        statement.setDate(6, Date.valueOf(project.getExpectedDate()));
+        statement.setDate(6, project.getExpectedDate());
         int updateCount = statement.executeUpdate(sql);
     }
 
@@ -36,8 +36,31 @@ public class ProjectDAO {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, projectNumber);
-        statement.executeUpdate();
+        int deleteCount= statement.executeUpdate();
     }
 
+    public List<Project> getAllProject() throws SQLException {
+
+        String sql = "SELECT * FROM Project";
+        List<Project> projectList = new ArrayList<>();
+
+        Connection connection = ConnectionFactory.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(sql);
+
+        while (rs.next()){
+            Project project = new Project();
+
+            project.setProjectNumber(rs.getInt("project_number"));
+            project.setProjectName(rs.getString("project_name"));
+            project.setProjectStart(rs.getDate("project_start"));
+            project.setDescription(rs.getString("description"));
+            project.setPrice(rs.getDouble("price"));
+            project.setExpectedDate(rs.getDate("expected_date"));
+            projectList.add(project);
+        }
+
+        return projectList;
+}
 
 }

@@ -1,22 +1,21 @@
 package Model;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Project {
 
     private int projectNumber;
     private String projectName;
-    private LocalDate projectStart;
+    private Date projectStart;
     private String description;
     private double price;
-    private LocalDate expectedDate;
+    private Date expectedDate;
 
     public int getProjectNumber() {
         return projectNumber;
     }
 
     public void setProjectNumber(int projectNumber) {
-
         this.projectNumber = projectNumber;
     }
 
@@ -24,15 +23,15 @@ public class Project {
         return projectName;
     }
 
-    public void setProjectName() {
+    public void setProjectName(String projectName) {
         this.projectName = projectName;
     }
 
-    public LocalDate getProjectStart() {
+    public Date getProjectStart() {
         return projectStart;
     }
 
-    public void setProjectStart(LocalDate projectStart) {
+    public void setProjectStart(Date projectStart) {
         this.projectStart = projectStart;
     }
 
@@ -52,11 +51,11 @@ public class Project {
         this.price = price;
     }
 
-    public LocalDate getExpectedDate() {
+    public Date getExpectedDate() {
         return expectedDate;
     }
 
-    public void setExpectedDate(LocalDate expectedDate) {
+    public void setExpectedDate(Date expectedDate) {
         this.expectedDate = expectedDate;
     }
 
@@ -72,3 +71,4 @@ public class Project {
                 '}';
     }
 }
+

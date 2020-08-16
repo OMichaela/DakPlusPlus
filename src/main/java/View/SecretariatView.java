@@ -9,9 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class SecretariatView {
-    public static void main(String[] args) {
-
-    }
+main
 
     protected void StaffDayAtWork(WorkDoneService workDoneService) {
         List<WorkDone> workDone = null;
@@ -44,7 +42,8 @@ public class SecretariatView {
             System.out.println("No birthday this week");
         } else {
             System.out.println("This week we'll celebrate birthdays of:");
-        result.forEach(System.out :: println);}
+        result.forEach(System.out :: println);
+        }
 
 
     }

@@ -1,18 +1,16 @@
 package Data;
 
-import java.sql.*;
-
 import Model.Staff;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;
+
 
 public class StaffDAO {
 
 
-
-    public List<Staff> getAllStaff() throws SQLException, ClassNotFoundException{
+    public List<Staff> getAllStaff() throws SQLException {
         String sql = "SELECT * FROM staff";
         List<Staff> staffList = new ArrayList<>();
         Connection connection = ConnectionFactory.getConnection();
@@ -57,7 +55,7 @@ public class StaffDAO {
         statement.executeUpdate();
 }
 
-    public void updateStaff(Staff staff) throws SQLException{
+    public void updateStaff(Staff staff) throws SQLException {
         String sql = "UPDATE staff SET (first_name=?,last_name=?,phone_number=?,phone_number_ice=?,date_of_birth=?,salary=? WHERE staff_id=?)";
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -73,7 +71,7 @@ public class StaffDAO {
 
     public List<Staff> findStaffByName(String firstName, String lastName) throws SQLException {
         String sql = "SELECT * FROM staff WHERE first_name =? OR last_name=?";
-        List<Staff> staffList = new ArrayList<>();
+        List<Staff> staffListByName = new ArrayList<>();
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, firstName);
@@ -90,9 +88,9 @@ public class StaffDAO {
             staff.setPhoneNumberIce(rs.getString("phone_number_Ice"));
             staff.setDateOfBirth(rs.getDate("date_of_birth"));
             staff.setSalary(rs.getDouble("salary"));
-            staffList.add(staff);
+            staffListByName.add(staff);
         }
-        return staffList;
+        return staffListByName;
 
 
 
