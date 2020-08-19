@@ -1,14 +1,10 @@
 package Data;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
-import java.sql.ResultSet;
-
 import Model.Project;
 import Model.Staff;
 import Model.WorkDone;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +36,7 @@ public class WorkDoneDAO {
                 public List<WorkDone> whoOnWhichProject (int staffId, int projectNumber) throws SQLException {
                     String sql = "SELECT * FROM staff JOIN project WHERE staff_id =? OR project_number=?";
                     List<Project> whoOnWhichProjectList = new ArrayList<>();
+                    List<Staff>
                     Connection connection = ConnectionFactory.getConnection();
                     Statement statement = connection.createStatement();
                     ResultSet rs = statement.executeQuery(sql);

@@ -9,7 +9,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class SecretariatView {
-main
+    public static void main(String[] args) {
+
+    }
+
 
     protected void StaffDayAtWork(WorkDoneService workDoneService) {
         List<WorkDone> workDone = null;

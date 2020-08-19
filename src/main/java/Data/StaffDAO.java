@@ -3,6 +3,7 @@ package Data;
 import Model.Staff;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class StaffDAO {
                     staff.setLastName(rs.getString("last_name"));
                     staff.setPhoneNumber(rs.getString("phone_number"));
                     staff.setPhoneNumberIce(rs.getString("phone_number_ice"));
-                    staff.setDateOfBirth(rs.getDate("date_of_birth"));
+                    staff.setDateOfBirth(rs.getDate("date_of_birth").toLocalDate());
                     staff.setSalary(rs.getDouble("salary"));
                     staffList.add(staff);
                 }
@@ -40,7 +41,7 @@ public class StaffDAO {
         statement.setString(2, staff.getLastName());
         statement.setString(3, staff.getPhoneNumber());
         statement.setString(4, staff.getPhoneNumberIce());
-        statement.setDate(5, staff.getDateOfBirth());
+        statement.setDate(5, Date.valueOf(staff.getDateOfBirth()));
         statement.setDouble(6, staff.getSalary());
         statement.executeUpdate();
 
@@ -63,19 +64,19 @@ public class StaffDAO {
         statement.setString(2, staff.getLastName());
         statement.setString(3, staff.getPhoneNumber());
         statement.setString(4, staff.getPhoneNumberIce());
-        statement.setDate(5, staff.getDateOfBirth());
+        statement.setDate(5, Date.valueOf(staff.getDateOfBirth()));
         statement.setDouble(6, staff.getSalary());
         statement.setInt(7, staff.getStaffId());
         statement.executeUpdate();
     }
 
-    public List<Staff> findStaffByName(String firstName, String lastName) throws SQLException {
+    public List<Staff> getStaffByFirstOrLastName(String firstNameOrLastName) throws SQLException {
         String sql = "SELECT * FROM staff WHERE first_name =? OR last_name=?";
         List<Staff> staffListByName = new ArrayList<>();
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, firstName);
-        statement.setString(2, lastName);
+        statement.setString(1, firstNameOrLastName);
+        statement.setString(2, firstNameOrLastName);
         ResultSet rs = statement.executeQuery(sql);
 
 
@@ -86,21 +87,57 @@ public class StaffDAO {
             staff.setLastName(rs.getString("last_name"));
             staff.setPhoneNumber(rs.getString("phone_number"));
             staff.setPhoneNumberIce(rs.getString("phone_number_Ice"));
-            staff.setDateOfBirth(rs.getDate("date_of_birth"));
+            staff.setDateOfBirth(rs.getDate("date_of_birth").toLocalDate());
             staff.setSalary(rs.getDouble("salary"));
             staffListByName.add(staff);
         }
         return staffListByName;
 
+    }
 
+    public List<Staff> getStaffByBirthDayToday() throws SQLException {
+        String sql = "SELECT * FROM staff WHERE DAY(date_of_birth) = DAY(now()) AND MONTH(date_of_birth) = MONTH(now());";
+        List<Staff> staffListByName = new ArrayList<>();
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet rs = statement.executeQuery(sql);
+
+        while(rs.next()){
+            Staff staff = new Staff();
+            staff.setStaffId(rs.getInt("staff_id"));
+            staff.setFirstName(rs.getString("first_name"));
+            staff.setLastName(rs.getString("last_name"));
+            staff.setPhoneNumber(rs.getString("phone_number"));
+            staff.setPhoneNumberIce(rs.getString("phone_number_Ice"));
+            staff.setDateOfBirth(rs.getDate("date_of_birth").toLocalDate());
+            staff.setSalary(rs.getDouble("salary"));
+            staffListByName.add(staff);
+        }
+        return staffListByName;
 
     }
 
-    public static List<Staff> getStaffBornThisWeek() {
-    return null;
+    public List<Staff> getStaffByBirthDayThisWeek() throws SQLException {
+        String sql = "SELECT * FROM staff WHERE WEEK(date_of_birth) = WEEK(now());";
+        List<Staff> staffListByName = new ArrayList<>();
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet rs = statement.executeQuery(sql);
+
+
+        while(rs.next()){
+            Staff staff = new Staff();
+            staff.setStaffId(rs.getInt("staff_id"));
+            staff.setFirstName(rs.getString("first_name"));
+            staff.setLastName(rs.getString("last_name"));
+            staff.setPhoneNumber(rs.getString("phone_number"));
+            staff.setPhoneNumberIce(rs.getString("phone_number_Ice"));
+            staff.setDateOfBirth(rs.getDate("date_of_birth").toLocalDate());
+            staff.setSalary(rs.getDouble("salary"));
+            staffListByName.add(staff);
+        }
+        return staffListByName;
+
     }
 
-    public static List<Staff> getStaffBornToday() {
-    return null;
-    }
 }

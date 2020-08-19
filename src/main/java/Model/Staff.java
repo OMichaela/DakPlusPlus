@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Staff {
 
@@ -9,7 +10,7 @@ public class Staff {
     private String lastName;
     private String phoneNumber;
     private String phoneNumberIce;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     private double salary;
 
 
@@ -52,11 +53,11 @@ public class Staff {
         this.phoneNumberIce = phoneNumberIce;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth){
+    public void setDateOfBirth(LocalDate dateOfBirth){
         this.dateOfBirth = dateOfBirth;
     }
 
